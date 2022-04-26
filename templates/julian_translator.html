@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block block_1 %}
+<img src="https://pm1.narvii.com/6752/f1cd7370a1ae135dc9da314058315f2693120686v2_hq.jpg" style="float:right;">
+<h3>The Julian day is the continuous count of days since the beginning of the Julian period, and is used primarily by astronomers, and in software for easily calculating elapsed days between two events (e.g. food production date and sell by date).</h3>
+<form method="post">
+<div>
+    {{ form.csrf_token }}
+</div>
+{% for field in form if field.name != 'csrf_token' %}
+    <div>
+        <p style="text-align:center">{{ field() }}</p>
+        {% for error in field.errors %}
+            <div class="error">{{ error }}</div>
+        {% endfor %}
+    </div>
+{% endfor %}
+</form>
+<br><br><br>
+<div class="alert alert-success" role="alert" style="width: 400px; margin: 30px;">
+  <h4 class="alert-heading">Result:</h4>
+  <p>{{ jd_date_searched }} JD</p>
+  <hr>
+  <p class="mb-0"> Btw, today: {{ jd_date_today }} JD</p>
+</div>
+
+{% endblock %}

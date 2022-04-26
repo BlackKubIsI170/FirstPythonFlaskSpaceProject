@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <title>{{ title }}</title>
+    <style>
+            .dot {
+                height: 50px;
+                width: 50px;
+                background-color: rgb(77, 233, 15);
+                border-radius: 30%;
+                display: inline-block;
+            }
+            .post {
+                text-align:center;
+                border: 5px solid #00005c;
+                border-width: 2px;
+                background: #ffffff;
+                padding: 10px;
+            }
+            .line_disp{
+                display: inline-block;
+            }
+                        /*общие настройки сетки*/
+            .grid {
+              /*рисуем зелёные рамки*/
+              border: 5px solid #d1e231;
+              /*подключаем сетку*/
+              display: grid;
+              /*формируем по 5 одинаковых строк и 6 столбцов*/
+              grid-template-columns: repeat(5, 200px);
+              grid-template-rows: repeat(6, 200px);
+            }
+
+            /*внешний вид ячеек*/
+            .grid > * {
+              /*фоновый цвет*/
+              background-color: #ffffff;
+              /*скругление углов*/
+              border-radius: 5px;
+              /*расстояние от одной границы ячейки до другой*/
+              margin: 1px;
+            }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <ul class="navbar-nav mr-auto">
+        <li>
+            <a class="navbar-brand" href="/">Main</a>
+        </li>
+        <li>
+            <a class="navbar-brand" href="/img_of_mars">Images of Mars</a>
+        </li>
+        <li>
+            <a class="navbar-brand" href="/pictures_of_the_day">Pictures of the day</a>
+        </li>
+        <li>
+            <a class="navbar-brand" href="/julian_translator">Julian translator</a>
+        </li>
+        {% if current_user.is_authenticated %}
+            <li>
+                <a class="navbar-brand" href="/messages/{{ current_user.id }}">Messenger</a>
+            </li>
+        {% endif %}
+        <li>
+            <a class="navbar-brand" href="/asteroids">Asteroids</a>
+        </li>
+
+        {% if current_user.is_authenticated %}
+        <li>
+            <form>
+                <button formaction="/logout" class="btn btn-outline-danger my-2 my-sm-0"
+                        type="submit">Log out
+                </button>
+            </form>
+        </li>
+        <pre>  </pre>
+        <li>
+            <a class="navbar-brand text-white" href="/user/{{ current_user.id }}">{{current_user.nick}}</a>
+        </li>
+        {% else %}
+        <li>
+            <form>
+                <button formaction="/registration" class="btn btn-outline-info my-2 my-sm-0"
+                        type="submit">Registration
+                </button>
+                <button formaction="/login" class="btn btn-outline-success my-2 my-sm-0"
+                        type="submit">Log in
+                </button>
+            </form>
+        </li>
+        {% endif %}
+
+    </ul>
+</nav>
+{% block block_1 %}{% endblock %}
+{% block block_2 %}{% endblock %}
+</body>
+</html>
+
+<!-- <pre>  </pre><a href="/"><span class="dot"></span></a> иконка пользователя -->
